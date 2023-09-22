@@ -1,0 +1,85 @@
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .h1 {
+    padding: 0px; 
+    text-align: center;
+    margin: 10px;
+    font-size: 35px; 
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .h2{
+    margin-top: 20px;
+  }
+  .h2 h3 {
+    font-size: 30px;
+     margin: 10px;
+     padding: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+  }
+  .center   {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.btn {
+  font-size: 25px;
+  color: wheat;
+  text-decoration: none;
+  transition:  1s ; 
+  margin: 0px;
+  display: block;
+}
+.btn:hover{
+  font-size: 27px;
+  color: wheat;
+}
+</style>
+
+<div class="center">
+  <div  style="border: 1px solid black; border-radius: 12px;  height: 400px; width: 350px;">
+    <div>
+      <h2  class="h1">Results</h2>
+      <hr>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+      <div class="h2">
+        <h3>Total</h3>
+        <h3>super senior</h3>
+        <h3> senior </h3>
+        <h3> junior </h3>
+        <h3>sub junior</h3>
+      </div>
+      <div  class="h2">
+        <h3>: <%= final%></h3>   
+        <h3>: 000</h3> 
+        <h3>: 000</h3> 
+        <h3>: 000</h3> 
+        <h3>: 000</h3> 
+      </div>
+    </div>
+  
+  </div>
+  <div style="height: 120px; width: 350px; border: 2px solid black;background: black; border-radius: 20px; margin-top: 10px; display: flex;justify-content: center;align-items: center; gap: 20px;">
+      <div >
+        <a href="/results/contestants" class="btn">contestent based results</a>
+      </div>
+      <div>
+        <a href="/results/contestants" class="btn">program based result</a>
+      </div>
+  </div>
+  
+</div>
+
+
+
+
+
+
+

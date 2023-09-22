@@ -1,0 +1,5 @@
+<ul>
+    <%group_program.forEach(g => { %>
+        <li><a href="/group_program/<%=g._id%>"><%=g.name%><%=g.sectionData%></a></li>
+        <%})%>
+</ul>

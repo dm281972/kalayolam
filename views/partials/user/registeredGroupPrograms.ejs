@@ -1,0 +1,14 @@
+<h1>groupPrograms</h1>
+<form action="/registeredGroupPrograms/section" method="post">
+  <%- include('../../partials/sectionForm.ejs') %>
+  <button type="submit">select</button>
+</form>
+<form action="/registeredGroupPrograms" method="get">
+  <input type="text" name="name" value="<%=searchOptions.name %>">
+  <button type="submit">search</button>
+</form>
+<ul>
+  <% groupPrograms.forEach( g => { %>
+<li><a href="/registeredGroupPrograms/<%=g._id%>"><%=g.name%></a></li>
+    <% })%>
+</ul>

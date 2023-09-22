@@ -1,0 +1,40 @@
+
+<a href="/programReg">back</a>
+<div><h1><%= program.name %></h1></div>
+<div>
+    <%selectedCon.forEach(e =>{ %>
+        <div><form action="/B" method="post"><span><%= e.name%> <%= e.admNo%> </span>
+            <%e.programData.forEach(p => {%>
+                <% if(p.__id === program.id){%>
+                    <%= p.verified%>
+                     <% }%>
+                <%})%>
+            
+            <input type="hidden" name="programName" value="<%=program.name%>">
+            <input type="hidden" name="programId" value="<%=program.id%>">
+             <input type="hidden" name="admNo" value="<%=e.admNo%>">
+             <button type="submit">remove</button></form> </div>
+    <%}) %>
+</div>
+<% if (program.maxCon === selectedCon.length ) { %>
+   <div><h1> max con reached</h1></div>
+    <% }else{%>
+<div>
+    <form action="/programReg/<%=program.id %>">
+        <input type="text" name="name" value="<%=searchOptions.name%>">
+        <button type="submit">search</button>
+    </form>
+</div>
+<div>
+    <% con.forEach((e) => { %>
+        
+          <form action="/programReg/<%= program.id %>" method="post">
+            <%= e.name %> <%= e.admNo %>
+            <input type="hidden" name="programName" value="<%= program.name %>">
+             <input type="hidden" name="conId" value="<%= e.id %>">
+            <button type="submit">Select</button>
+          </form>
+        
+      <% }) %>
+</div>
+<% }%>

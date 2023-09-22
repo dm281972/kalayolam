@@ -1,0 +1,15 @@
+<h1><%= contestant.name %></h1>
+<ul>
+  <% programs.forEach(program => { %>
+    <li>
+      <h3><%= program.name %></h3>
+      <% if (program.result && program.result.position && program.result.grade) { %>
+        <p>Position: <%= program.result.position %></p>
+        <p>Grade: <%= program.result.grade %></p>
+      <% } else { %>
+        <p>Results not published yet.</p>
+      <% } %>
+    </li>
+  <% }) %>
+</ul>
+<a href="/results/contestants">Back to Contestants</a>

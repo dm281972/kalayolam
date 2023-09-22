@@ -1,0 +1,108 @@
+<style>
+    body {
+        overflow-y: hidden;
+    }
+.screen {
+    height: 100vh;
+    width: 100%;
+    background: #000;
+   
+}
+header {
+    height: 60px;
+    width: 100%;
+    background: rgb(5, 4, 4);
+    border-bottom: 2px solid #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.container{
+height: 100%;
+
+}
+aside{
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    left: -250px;
+    background: rgb(0, 0, 0);
+    border-right: 2px solid #fff;
+    flex-shrink: 0;
+   
+}
+.login {
+    position: fixed  ;
+    bottom: 10px;
+    margin-left: 90px;
+    width: 100%;
+}
+aside.active {
+    left:  0;
+}
+.button {
+    height: 50px; width: 70px; background: #fff; margin-left: 30px;
+    
+    
+}
+main {
+    height: 100%;
+    width: 100%;
+    background: #ffffff3d;
+}
+.center {
+    display: flex;
+    justify-content: center;
+}
+.w-full {
+    width: 100%;
+}
+</style>
+
+<div class="screen">
+    <header>
+        <div class="button">
+           <div style="height: 14px; width: 100%; background: #000;margin-top: 2.5px;"></div>
+           <div style="height: 14px; width: 100%; background: #000; margin-top: 2.5px;"></div>
+           <div style="height: 14px; width: 100%; background: #000; margin-top: 2.5px;"></div>
+        </div>
+        <div>
+            <h1 style="color: white; font-size: large;">kalayolam .com</h1>
+        </div>
+       
+
+    </header>
+    <div class="container">
+        <aside>
+            <div style="height: 80%; width: 100%; border-bottom:2px solid #fff;display: flex; flex-direction: column;
+             align-items: center; ">
+                <a href="/public_portal" style="color: #fff; font-size: 22px;">results</a>
+            </div>
+            <div>
+                <div class="login">
+                    <a href="/login" style="color: #fff; font-size: 22px;">login</a>
+                </div>
+            </div>
+          
+           
+        </aside>
+        <main>
+
+        </main>
+    </div>
+</div>
+
+
+<script>
+    const button = document.querySelector('.button')
+    const aside = document.querySelector('aside')
+    button.addEventListener('click', function(){
+        aside.classList.toggle('active');
+    }) 
+
+   
+</script>
+
+
+
+

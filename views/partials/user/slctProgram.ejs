@@ -1,0 +1,51 @@
+
+<a href="/home" style="margin: 30px; ">back</a>
+<div style="margin: 15px;border-radius: 10px;box-sizing: border-box;box-shadow: 5px 5px 10px; ">
+
+  <div style="padding: 20px;border: 1px solid black; border-radius: 10px; display: flex;justify-content: space-between; box-shadow: 5px 5px 10px;">
+    <div style="margin-left:12px ;display: flex;justify-content: center;">
+      <form action="/selectStage" method="post">
+        <select name="stage" style="background: whitesmoke; border-radius: 12px;font-family: sans-serif; ">
+           <option value="non stage">non stage</option>
+           <option value="stage">stage</option>
+        </select>
+        <button type="submit">submit</button>
+      </form>
+  
+      <form action="/selectsub" method="post">
+        <%- include('../../partials/sectionForm.ejs') %>
+            <button type="submit">select</button>
+       </form>
+    </div>
+    <div style="flex-grow: 2; ">
+      <form action="/programReg" method="get">
+        <input type="text" name="name"  value="<%=searchOptions.name %>" placeholder="search program name" style="width: 100%;padding: 13px;">
+        <button type="submit">search</button>
+     </form>
+    </div>
+  </div>
+  <div  style="border: 1px solid black; border-radius: 15px; margin-top: 15px; font-size: larger; overflow-y: auto;">
+          
+           <div>
+              <h4 style="margin: 15px; text-align: center;">nonstage  sectiondata</h4>
+              
+           </div>
+           <hr>
+           <div style=" text-align: center;">
+              <ul>
+                <% if (programs.length > 0) { %>
+                  <% programs.forEach(p => {%>
+                  <a href="/programReg/<%=p._id%>"><li><%= p.name%>  <%= p.sectionData%></li></a> 
+                  <hr>
+                  <%})%>
+                  <%}else { %>
+                     <h4 style="text-align: center;">no program found</h4>
+                  <% }%>
+              
+              </ul>
+              
+           </div>
+    </div>
+      
+</div>
+

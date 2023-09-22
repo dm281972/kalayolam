@@ -1,0 +1,58 @@
+<h1 style="text-align: center;">add results</h1> 
+<h1 style="text-align: center;"> <%=groupPrograms.name %></h1>
+<div style="display: flex;flex-wrap: wrap;justify-content: center; gap: 20px; "> 
+   <div style="display: flex;flex-wrap: wrap; "></div>
+   <div>
+    <h1>Is published "<%= groupPrograms.published %>"</h1>
+    <div>
+      <form action="/admin/publish/GroupProgramResult/<%= groupPrograms.id %>" method="post">
+        <button type="submit">Publish</button>
+      </form>
+    </div>
+<% groupPrograms.registeredTeams.forEach(g => {%>
+  
+        <div style="display: flex; justify-content: center; gap: 25px;border: 2px solid black; border-radius: 15px; margin-bottom: 5px;">
+            <div>
+                <p><%=g.name%></p>
+                <ul>
+                    <% g.members.forEach(m => {%>
+                        <li><%=m.name%></li>
+                        <% })%>
+                </ul>
+            </div>
+            <div > 
+            <p>P:<%=g.result.position%></p>
+            <p> G:<%=g.result.grade%></p>
+            </div>
+            <div>
+                <form action="/admin/agpr/<%=groupPrograms.id%>" method="post">
+                    <ul>
+                        <li> <label >position</label>
+                          <select name="position">
+                            <option value="null">null</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                          </select>
+                        </li>
+                        <li> <label >grade</label>
+                          <select name="grade">
+                            <option value="null">null</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                          </select>
+                        </li>
+                      </ul>
+                      <input type="hidden" name="teamName" value="<%=g.name%>">
+                      <input type="hidden" name="groupId" value="<%=g._id  %>">
+
+
+
+                      <button type="submit" style="margin-left: 50%;">submit</button>
+                </form>
+          </div>
+         </div>
+   
+ 
+<%})%>
+</div>

@@ -1,0 +1,44 @@
+<a href="/admin">back</a>
+<form action="/admin/CONDetails" method="GET">
+    
+     
+        <label>admNO</label>
+        <input type="text" name="name" value="<%= searchOptions.name %>">
+ <button  type="submit">Search</button>
+    
+  </form>
+
+<!-- //TABLE -->
+<table class="table">
+ <thead>
+  <tr>
+    <th style="margin: 150px;" >admNO</th>
+    <th style="margin: 150px;">name</th>
+    <th style="margin: 150px;">section</th>
+    <th style="margin: 150px;">team</th>
+    <th style="margin: 150px;">class</th>
+    <th style="margin: 150px;">tp</th>
+    <th style="margin: 150px;">p</th>
+    <th style="margin: 150px;">all</th>
+    <th style="margin: 150px;">rank</th>
+    <th style="margin: 150px;">unique</th>
+   </tr>
+</thead> 
+    <tbody>
+ 
+    <% if (contestend){%>
+      
+    <% contestend.forEach(e => { %>
+      <tr>
+    <th><%= e.name%></th>  
+    <th><%= e.sectionData%></th>  
+    <th><%= e.user%></th> 
+    <th><%= e.admNo%></th> 
+  </tr>
+    <%} ) %>
+    <% }%>
+  
+          
+            
+    </tbody>
+  </table>

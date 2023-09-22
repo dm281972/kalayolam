@@ -1,0 +1,26 @@
+<!-- user, programs, groupPrgram -->
+<div>
+    <h1><%= user.name %></h1>
+    <div>
+        <h1>individual Programs</h1>
+        <ul>
+           <% programs.forEach(p => {%>
+            <form action="/admin/2-set-P-V/<%= user.id%>" method="post">
+                <li onclick="handlesubmit"><%= p.name%></li>
+                <button >submit</button>
+            </form>
+            <%})%>
+        </ul>
+    </div>
+    <div>
+        <h1>group programs</h1>
+        <ul>
+            <li>group programs</li>
+        </ul>
+    </div>
+</div>
+<script>
+    function handlesubmit () {
+
+    }
+</script>

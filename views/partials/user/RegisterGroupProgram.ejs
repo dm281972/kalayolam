@@ -1,0 +1,183 @@
+<style>
+        .mg-50{
+                /* margin-top: 50px; */
+        }
+        .mg-lf-50{
+                /* margin-left: 50px; */
+        }
+        .flex-c {
+                /* display: flex;
+                justify-content: center; */
+        }
+      
+ 
+
+.select-box {
+    
+    margin-top: 20px;
+    max-width: 380px;
+    position: relative;
+}
+.select-option {
+    position: relative;
+    display: flex;
+    border: 1px solid black;
+    border-radius: 20px;
+   
+}
+.select-option input {
+    width: 100%;
+    background: #fff;
+    color: #000;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 22px;
+    padding: 15px 20px;
+    border: 0 !important;
+    outline: 0 !important;
+    border-radius: 20px;
+}
+.select-option:after{
+    content: "";
+    border-top: 12px solid #000;
+    border-left: 8px solid transparent;
+    border-right:8px solid transparent ;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -8px;
+    border-radius: 20px;
+}
+.content{
+    background-color: #fff;
+    position: absolute;
+    color: #000;
+    border-radius: 7px;
+    margin-top: 15px;
+    width: 100%;
+    z-index: 999;
+    padding: 20px;
+    display: none;
+}
+.search input {
+    width: 100%;
+    font-size: 17px;
+    padding: 15px;
+    outline: 0;
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
+}
+.options{
+  margin-top: 10px;
+  max-height: 250px;
+  overflow-y:auto ;
+  padding: 0;
+}
+.options li {
+    padding: 10px 15px;
+    border-radius:5px ;
+    font-size: 21px;
+    cursor: pointer;
+    border-bottom: 1px solid grey;
+}
+.options li:hover {
+    background-color: #f2f2f2;
+}
+.select-box.active .content {
+    display: block;
+}
+.select-box.active .select-option:after{
+    transform: rotate(-180deg);
+}
+
+</style>
+
+
+    
+    <div style="display: flex; justify-content: center; align-items: center;height: 81dvh; ">
+        
+          
+        
+    
+        <div class="mg-lf-50">
+            <h3 style="text-align: center;"><%= programs.name %></h3>
+            <form action="/registerContestants" method="post">
+                <input type="hidden" name="programId" value="<%= programs._id %>">
+                <input type="hidden" name="maxconperteam" value="<%= programs.groupProgram.maxconperteam %>">
+                <div id="contestantFields">
+                    <!-- JavaScript will dynamically add the input fields here -->
+                </div>
+                <div style="display: flex; justify-content: center; background-color: rgb(12, 69, 92); border-radius: 25px; margin-top: 10px    ;">
+                    <button style="color: white; font-size: 22px;" type="submit">Submit</button>
+                </div>
+              
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        const maxconperteam = <%= programs.groupProgram.maxconperteam %>;
+    
+        const contestantFields = document.getElementById('contestantFields');
+        for (let i = 1; i <= maxconperteam; i++) {
+            const inputGroup = document.createElement('div');
+            inputGroup.innerHTML = `
+                <div class="select-box">
+                    <div class="select-option">
+                        <input type="text" name="contestant${i}" placeholder="select Contestant ${i} Name" class="soValue" readonly>
+                        
+                    </div>
+                    <div class="content">
+                        <div class="search">
+                            <input type="text" class="optionSearch" placeholder="Search" name="">
+                        </div>
+                        <ul class="options">
+                            <%contestent.forEach(c => { %>
+                                <li><%=c.name %></li>
+                            <%})%>
+                        </ul>
+                    </div>
+                </div>
+                
+            `;
+            contestantFields.appendChild(inputGroup);
+        }
+    
+        const selectBoxes = document.querySelectorAll('.select-box');
+        selectBoxes.forEach(selectBox => {
+            const selectOption = selectBox.querySelector('.select-option');
+            const soValue = selectBox.querySelector('.soValue');
+            const optionSearch = selectBox.querySelector('.optionSearch');
+            const optionsList = selectBox.querySelectorAll('.options li');
+    
+            selectOption.addEventListener('click', function () {
+                selectBox.classList.toggle('active');
+            });
+    
+            optionSearch.addEventListener('input', function () {
+                const filter = optionSearch.value.trim().toUpperCase();
+    
+                optionsList.forEach(function (optionsListSingle) {
+                    const textValue = optionsListSingle.textContent.toUpperCase();
+                    if (textValue.includes(filter)) {
+                        optionsListSingle.style.display = '';
+                    } else {
+                        optionsListSingle.style.display = 'none';
+                    }
+                });
+            });
+    
+            optionsList.forEach(function (optionsListSingle) {
+                optionsListSingle.addEventListener('click', function () {
+                    const text = this.textContent;
+                    soValue.value = text;
+                    selectBox.classList.remove('active');
+                    optionSearch.value = ''; // Clear search input
+                    optionsList.forEach(function (li) {
+                        li.style.display = ''; // Reset display of all options
+                    });
+                });
+            });
+        });
+    </script>
+    

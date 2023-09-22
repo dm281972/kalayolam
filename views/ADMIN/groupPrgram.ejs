@@ -1,0 +1,39 @@
+<div>
+    <form action="/admin/c" method="post">
+        <div>
+            <label>program name</label>
+            <input type="text" name="name">
+        </div>
+        <div>
+        <%- include('../partials/sectionForm.ejs') %>
+        </div>
+        <div>
+            <label>code</label>
+            <input type="text" name="code">
+        </div>
+        <div>
+            <label>stage</label>
+             <select name="stage">
+                <option value="stage">stage</option>
+                <option value="non-stage">non-stage</option>
+             </select>
+        </div>
+        <div>
+            <label> max Contestants In Team</label>
+            <input type="number" name="maxConTeam">
+        </div>
+        <div>
+            <label> max Teams Per   User</label>
+            <input type="number" name="maxTeam">
+        </div>
+        <div>
+            <select name="language">
+                <option value="urdu">urdu</option>
+                <option value="malayalam">malayalam</option>
+                <option value="english">english</option>
+                <option value="arabic">arabic</option>
+            </select>
+        </div>
+        <button type="submit">submit</button>
+    </form>
+</div>

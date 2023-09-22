@@ -1,0 +1,19 @@
+
+<%= group_program.name %>
+<%if (group_program.registeredTeams.length >= 1){%>
+    <ul>
+        <%usergroupProgram.members.forEach( m => { %>
+       <li><%= m.name%></li>
+            <% })%>
+    </ul>
+  
+
+    <%if (usergroupProgram.result.position == '' && usergroupProgram.result.grade == '' ){%>
+    <h1>result not added</h1>
+    <%}else {%>
+  <h1> <%=usergroupProgram.result.position %>,<%=usergroupProgram.result.grade %></h1>
+        <% }%>
+
+        <% }else{%>
+            <h1>no members registered</h1>
+            <% }%>

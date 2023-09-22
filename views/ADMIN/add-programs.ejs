@@ -1,0 +1,36 @@
+ <h1>add programs</h1>
+    <form name="form1" method="POST" action="/admin/add-programs">
+   
+        <div>
+         <label for=" program-name"> program name</label>
+         <input type="text" name="name" >
+        </div>
+       <div>
+  <label >Section:</label>
+  <%- include('../partials/sectionForm.ejs') %>
+       </div>
+<div>
+  <label >stage:</label>
+        <select name="stagedata" id="stage-data">
+            <option value="stage">stage</option>
+            <option value="non-stage">Non-stage</option>
+        </select>
+     
+</div>
+      <div>
+      <label >group:</label>
+        <select name="groupdata" id="group-data">
+            
+            <option value="non-group">Non-group</option>
+            <option value="group">2 C</option>
+            <option value="group">3 C</option>
+            <option value="group">4 C</option>
+            <option value="group">6 C</option>
+        </select> 
+      </div>   
+      <div>
+        <label for="nocon">nocon</label>
+        <input type="number" name="maxcon" id="">
+      </div>
+     <button type="submit">submit</button>
+    </form>  

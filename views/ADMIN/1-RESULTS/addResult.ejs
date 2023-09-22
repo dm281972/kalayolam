@@ -1,0 +1,82 @@
+<a href="/admin/programDetails">back</a>
+
+<div style="display: flex; justify-content: center;">
+  <div>
+    <div>
+      ADD RESULTS
+    </div>
+    
+    <div>
+      <div style="display: flex; justify-content: center; gap: 30px;">
+        <% if (programs) { %>
+          <div>
+            <h1><%= programs.name %></h1>
+          </div>
+          <div>
+            <h1>Is published "<%= programs.published %>"</h1>
+            <div>
+              <form action="/admin/publishProgramResult/<%= programs.id %>" method="post">
+                <button type="submit">Publish</button>
+              </form>
+            </div>
+          </div>
+        <% } %>
+      </div>
+
+      <% if (contestants.length > 0) { %>
+        <% contestants.forEach(c => { %>
+          <div style="border: 2px solid black; margin-bottom:20px; border-radius: 20px;">
+            <p style="text-align: center;"><%= c.name %> <%= c.user %></p>
+            <% c.programData.forEach(pd => { %>
+              <% if (pd.__id === programs.id) { %>
+                <hr>
+                <div style="display: flex;  gap: 30px; ">
+                  <div style="margin-left: 30%;">
+                   
+                      <%if(pd.result) {%>
+                        <p>Position: <%= pd.result.position %></p>
+                        <p>Grade: <%= pd.result.grade %></p>
+                        <% }else {%>
+                          <h1>null</h1>
+                          <% }%>
+                  </div>
+                  <div >
+                   
+<form action="/admin/addResults/<%= programs.id %>" method="post">
+  <ul>
+    <li> <label >position</label>
+      <select name="position">
+        <option value="null">null</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+    </li>
+    <li> <label >grade</label>
+      <select name="grade">
+        <option value="null">null</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+      </select>
+    </li>
+  </ul>
+  <input type="hidden" name="name" value="<%= c.name %>">
+  <input type="hidden" name="sectionData" value="<%= c.sectionData %>">
+  <input type="hidden" name="name" value="<%= c.user %>">
+  <button style="margin-left: 50%;" type="submit">submit</button>
+</form>
+                  </div>
+                </div>
+                
+                <%}%>
+            <% }) %>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No contestants found with the selected program.</p>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+

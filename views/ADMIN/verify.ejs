@@ -1,0 +1,249 @@
+<style>
+ /* body {
+  background: #2990b9ea;
+ } */
+  /* .body{
+   border-radius: 20px ;
+   background: #24d48b8a;
+  } */
+  /* .datas{
+   
+   
+   border-top-left-radius: 20px;
+   border-top-right-radius: 20px;
+  } */
+  .data{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    gap: 12px;
+    height: 200px;
+    min-width: 100%;
+    background: #2c24248a;
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .contentent-box{
+    border-radius: 20px;
+    padding: 7px;
+    height: 160px;
+    min-width: 160px;
+    background: black;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-area{
+   border-radius: 20px;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: #08ff3e59;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+  .section-select{
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+  .group-select{
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+  .search-bar {
+    
+    height: 100%;
+    width: 55%;
+  }
+  .search-bar > form{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  }
+  input {
+  width: 100%;
+  background-color: white;
+}
+  .details{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 100%;
+    height: 50px;
+    background: #041322e5;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .details > p {
+    color: #fff;
+  }
+  .details > form > button {
+    width: 80px;
+    border-radius: 10px;
+    background-color: #23a398;
+    color: #000000;
+    font-size: 22px;
+    font-weight: 600;
+  }
+</style>
+
+<div class="body">
+  <div class="search-area">
+    <div class="section-select">
+     <form action="/admin/verifyPrograms">
+      <%-include('../partials/sectionForm.ejs') %>
+      <button type="submit">select</button>
+     </form>
+     
+    </div>
+    
+    <div class="search-bar">
+      <form action="/admin/verifyPrograms" method="get"> <!-- Change the action to your route -->
+        <input type="text" name="search" placeholder="Search by program name">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+<% if (!searchQuery)  {%>
+  <div class="datas">
+    <% programContestantsMap.forEach((programData, programId) => { %>
+      <div class="details">
+        <p><%= programData.programName %></p><p><%= programData.language %></p><p><%= programData.stage %></p><p><%= programData.published %><p><%= programData.section %>
+        <form action="publishProgramResult/<%=programId%>" method="post">
+          <button type="submit">publish</button>
+        </form>
+      </div>
+      <div class="data">
+        <% programData.contestants.forEach(contestant => { %>
+          <div class="contentent-box">
+            <div style="display: block;border: 2px solid #fff;">
+              <span><%= contestant.name %></span> 
+              <br>
+              <span><%= contestant.user %></span>
+              <% contestant.programData.forEach(p => { %>
+                <% if (p.name === programData.programName && programId == p.__id) {%>
+                  <h3><%= p.name%></h3>
+                  <div style="display: flex; margin: 0; padding: 0;">
+                    <h3 style="margin: 0;">P : <%= p.result.position%></h3>
+                    <h3 style="margin: 0;">G : <%= p.result.grade%></h3>
+                  </div>
+                  
+           
+              
+           
+            </div>
+            <div style="width: 100px;height: 200px;background: #82cbceb7;">
+              <% if(!p.verified) { %>
+              <form action="verifyProgram/<%=contestant._id%>/<%=programId%>" method="post">
+                <button type="submit">verify</button>
+              </form>
+              <%  } else{%>
+                <form action="addResults/<%=contestant._id%>/<%=programId%>" method="post">
+                  <select name="position" >
+                    <option value="null">null</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                  <select name="grade" >
+                    <option value="null">null</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                  </select>
+                  <button type="submit">add result</button>
+                </form>
+                <% }%>
+            </div>
+            <% } %>
+            <% }) %>
+          </div>
+        <% }) %>
+      </div>
+    <% }) %>
+  </div>
+
+<% } else {%>
+
+
+  <div class="datas">
+    <% programContestantsMap.forEach((programData, programId) => { %>
+      <% if (programData.programName.toLowerCase().includes(searchQuery.toLowerCase())) { %>
+        <div class="details">
+          <p><%= programData.programName %></p><p><%= programData.language %></p><p><%= programData.stage %></p><p><%= programData.published %><p><%= programData.section %>
+          <form action="publishProgramResult/<%=programId%>" method="post">
+            <button type="submit">publish</button>
+          </form>
+        </div>
+        <div class="data">
+          <!-- Display contestant details for the filtered program -->
+          <% programData.contestants.forEach(contestant => { %>
+            <div class="contentent-box">
+              <div style="display: block;border: 2px solid #fff;">
+                <span><%= contestant.name %></span>
+                <br>
+                <span><%= contestant.user %></span>
+                <% contestant.programData.forEach(p => { %>
+                  <% if (p.name === programData.programName && programId == p.__id) {%>
+                    <h3><%= p.name%></h3>
+                    <div style="display: flex; margin: 0; padding: 0;">
+                      <h3 style="margin: 0;">P : <%= p.result.position%></h3>
+                      <h3 style="margin: 0;">G : <%= p.result.grade%></h3>
+                    </div>
+                    
+             
+                
+             
+              </div>
+              <div style="width: 100px;height: 200px;background: #82cbceb7;">
+                <% if(!p.verified) { %>
+                <form action="verifyProgram/<%=contestant._id%>/<%=programId%>" method="post">
+                  <button type="submit">verify</button>
+                </form>
+                <%  } else{%>
+                  <form action="addResults/<%=contestant._id%>/<%=programId%>" method="post">
+                    <select name="position" >
+                      <option value="null">null</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                    <select name="grade" >
+                      <option value="null">null</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                    </select>
+                    <button type="submit">add result</button>
+                  </form>
+                  <% }%>
+              </div>
+              <% } %>
+              <% }) %>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    <% }) %>
+  </div>
+
+<% }%>
+</div>
+
+
+
+
+
+

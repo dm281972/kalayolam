@@ -1,0 +1,24 @@
+
+<form action="/admin/addResults/<%= programs.id %>" method="post">
+    <ul>
+      <li> <label >position</label>
+        <select name="position">
+          <option value="null">null</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </li>
+      <li> <label >grade</label>
+        <select name="grade">
+          <option value="null">null</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+        </select>
+      </li>
+    </ul>
+    <input type="hidden" name="name" value="<%= c.name %>">
+    <input type="hidden" name="sectionData" value="<%= c.sectionData %>">
+    <input type="hidden" name="name" value="<%= c.user %>">
+    <button type="submit">submit</button>
+  </form>

@@ -1,0 +1,9 @@
+<h1>select group program details</h1>
+
+    <p>programs</p>
+    <%groupPrograms.forEach(p => { %>
+        <div>
+           <a href="/admin/groupPrgramDetails/<%=p.id %>"> <li><%=p.name%></li></a>
+         
+        </div>
+    <% })%>

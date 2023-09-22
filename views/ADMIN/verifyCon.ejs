@@ -1,0 +1,30 @@
+
+
+  <div>
+    <div>
+        <h1>select section</h1>
+        <form id="myForm" action="/admin/contestentVerify" method="get">
+         <%- include('../partials/sectionForm.ejs')%>
+        <button type="submit">select</button>
+          </form>
+    </div>
+    <div>
+        <h1>select team</h1>
+        <form >
+            <label for="">select section</label>
+         <select name="sectionData" >
+          <option value="bidaya">team 1</option>
+          <option value="ula">Ula</option>
+          <option value="thaniya">Thaniya</option>
+          <option value="thanaviya">Thanaviya</option>
+        </select>
+        <button type="submit">select</button>
+          </form>
+    </div>
+  </div>
+  <div>
+    <% constestent.forEach(c =>{ %>
+        <h1><%= c.name%></h1>
+        <h1><%= c.user%></h1>
+  <%  }) %>
+  </div>

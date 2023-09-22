@@ -1,0 +1,55 @@
+<a href="/admin">back</a>
+
+    <div style="position: absolute; ;">
+      <div style="margin: 50px; margin-left:450px ;">
+        <div>
+          <form action="/admin/programDetails" method="GET">
+          <label>program code</label>
+          <input type="text" name="name" value="<%= searchOptions.name %>">
+          <button  type="submit">Search</button>
+          </form>
+       </div>
+       
+       
+    
+  
+  <!-- //TABLE -->
+  <table class="table">
+   <thead>
+    <tr>
+     
+      <th>name</th>
+      <th>section</th>
+      <th>team</th>
+      <th>class</th>
+      <th>tp</th>
+      <th>p</th>
+      <th>all</th>
+      <th>rank</th>
+      <th>unique</th>
+     </tr>
+  </thead> 
+      <tbody>
+   
+    
+        
+      <% programs.forEach(e => { %>
+        <tr>
+      
+      <th><%= e.name%> </th>  
+      <th><%= e.sectionData%></th>  
+      <th><%= e.user%></th> 
+      <th><%= e.admNo%></th> 
+      <th><a href="addResults/<%=e.id %>">view</a></th>
+    </tr>
+      <%} ) %>
+ 
+    
+            
+              
+      </tbody>
+    </table>
+  
+      </div>
+    </div>
+  

@@ -1,0 +1,42 @@
+
+<div  class="flex justify-center h-full items-center">
+    <div>
+        <div style="display: block; margin: 50px;">
+   
+            <form action="/selectStage2" method="post">
+               <select name="stage">
+                  <option value="non stage">non stage</option>
+                  <option value="stage">stage</option>
+               </select>
+               <button type="submit">submit</button>
+              </form>
+           </div>
+           <div>
+            <form action="/selectsub2" method="post">
+                <%- include('../../partials/sectionForm.ejs') %>
+                   <button type="submit">select</button>
+              </form>
+           </div>
+    </div>
+    <div class="border-2 border-black rounded-md">
+        <div class="h-5 w-25">
+            <form action="/registerGroupPrograms" >
+                <input type="text" name="name" value="<%=searchOptions.name %>">
+                <button type="submit">search</button>
+            </form>
+        </div>
+        <hr>
+        <div class="p-6">
+            <h1 >Programs</h1>
+        </div>
+        <hr>
+        <div class="p-6">
+            <ul>
+                <%programs.forEach(p => { %>
+                   <li><a href="/registerGroupPrograms/<%=p._id%>"><h3><%= p.name%></h3></a></li> 
+                <% })%>
+            </ul>
+        </div>
+    </div>
+    
+</div>
